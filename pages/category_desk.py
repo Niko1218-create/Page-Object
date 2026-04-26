@@ -8,7 +8,7 @@ from pages.base_page import BasePage
 class CategoryDesk(BasePage):
     page_url = '/shop/category/desks-1'
 
-    def new_page_text(self):
+    def checking_product_page_title(self, text):
         self.driver.implicitly_wait(6)
         desk = self.driver.find_element(By.CLASS_NAME, 'img-fluid')
         popup = self.driver.find_element(By.CLASS_NAME, 'a-submit')
@@ -17,9 +17,9 @@ class CategoryDesk(BasePage):
         actions.click(popup)
         actions.perform()
         new_page = self.driver.find_element(By.CLASS_NAME, 'product_display_name')
-        assert new_page.text == '[FURN_0096] Customizable Desk (Steel, White)'
+        assert new_page.text == text
 
-    def desk_text(self):
+    def open_page_by_search_and_verify(self):
         search = self.driver.find_element(By.XPATH, '//*[@id="products_grid"]/div[1]/form/div/input')
         search.send_keys('Desks')
         glass = self.driver.find_element(By.CLASS_NAME, 'oi-search')
@@ -27,7 +27,7 @@ class CategoryDesk(BasePage):
         desk = self.driver.find_element(By.CLASS_NAME, 'd-inline-block')
         assert desk.text == 'Desks'
 
-    def element_text(self):
+    def check_element_text(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
         desk = self.driver.find_element(
