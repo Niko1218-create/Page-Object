@@ -8,7 +8,7 @@ def test_new_page_text(category_desk):
 
 def test_search_field(category_desk):
     category_desk.open_pages()
-    category_desk.entering_a_character_in_the_search_bar()
+    category_desk.entering_a_character_in_the_search_bar('D')
     category_desk.verification_that_the_selected_element_has_appeared_in_the_path('Desks')
 
 
