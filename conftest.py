@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options  # для Докера
 import pytest
 from pages.category_desk import CategoryDesk
 from pages.office_design import OfficeDesign
@@ -7,7 +8,9 @@ from pages.order_overview import OrderOverview
 
 @pytest.fixture()
 def driver():
-    chrome_driver = webdriver.Chrome()
+    options = Options()  # для Докера
+    options.add_argument('--headless')  # для Докера
+    chrome_driver = webdriver.Chrome(options=options)  # для Докера
     chrome_driver.maximize_window()
     yield chrome_driver
     chrome_driver.quit()
