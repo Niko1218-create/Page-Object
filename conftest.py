@@ -10,6 +10,7 @@ from pages.order_overview import OrderOverview
 def driver():
     options = Options()  # для Докера
     options.add_argument('--headless')  # для Докера
+    options.add_argument('--disable-dev-shm-usage')  # для Докера
     chrome_driver = webdriver.Chrome(options=options)  # для Докера
     chrome_driver.maximize_window()
     yield chrome_driver
