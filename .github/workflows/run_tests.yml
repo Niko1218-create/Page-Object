@@ -16,5 +16,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: run tests
-        run: pytest
+        run: pytest --alluredir=allure-results
+      - name: Install Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: microsoft
+          java-version: '25'
+      - name: Install Allure
+        run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.45.0/allure-2.45.0.tgz && sudo tar -zxvf allure-2.45.0.tgz -C /opt/ && sudo ln -s /opt/aluure-2.45.0/bin/allure /usr/binallure
+        
         
