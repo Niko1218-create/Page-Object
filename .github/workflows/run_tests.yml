@@ -8,9 +8,9 @@ jobs:
     name: Run autotests
     steps:
       - name: Checkout autotests
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
       - name: Set up Python environment
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - name: Install dependencies
@@ -18,11 +18,23 @@ jobs:
       - name: run tests
         run: pytest --alluredir=allure-results
       - name: Install Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v4
         with:
           distribution: microsoft
-          java-version: '25'
+          java-version: '21'
       - name: Install Allure
-        run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.45.0/allure-2.45.0.tgz && sudo tar -zxvf allure-2.45.0.tgz -C /opt/ && sudo ln -s /opt/aluure-2.45.0/bin/allure /usr/binallure
-        
+        run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+          sudo tar -zxvf allure-2.32.0.tgz -C /opt/
+          sudo ln -s /opt/allure-2.32.0/bin/allure /usr/local/bin/allure
+          allure --version
+      - name: Generate report
+        run: allure generate -c allure-results -o allure-report
+      - name: Save allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 1
+          
+          
         
